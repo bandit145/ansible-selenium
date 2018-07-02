@@ -1,0 +1,43 @@
+- name: test selenium module
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: selenium config
+      selenium:
+        url: http://192.168.50.2
+        validate_certs: no
+        wait: 5
+        actions:
+          - element: "New phpipam installation"
+            action: click
+            get_element_by: link_text
+          - element: "/html/body/div/div[4]/div/div[1]/div[1]/div/div/div/ol/li[1]/a"
+            action: click
+            get_element_by: xpath
+          - element: "mysqlrootuser"
+            action: send_keys
+            data: root
+            get_element_by: name
+          - element: "mysqlrootpass"
+            action: send_keys
+            data: testpass
+            get_element_by: name
+          - element: "/html/body/div/div[4]/div/div[1]/div[1]/div/div/form/div/div[13]/div/a[2]"
+            action: click
+            get_element_by: xpath
+          - element: "Continue"
+            action: click
+            get_element_by: link_text
+          - element: password1
+            action: send_keys
+            data: testpass
+            get_element_by: name
+          - element: password2
+            action: send_keys
+            data: testpass
+            get_element_by: name
+          - element: "/html/body/div/div[4]/div/div[1]/div[1]/div/div/form/div/div[10]/div/input"
+            action: click
+            get_element_by: xpath
+      delegate_to: localhost
