@@ -53,7 +53,7 @@ def configure_driver(module):
 		#thanks mbacko
 		capabilities = DesiredCapabilities.CHROME.copy()
 		if not module.params['validate_certs']:
-			module.fail_json(msg='Currently SSL certificates must be valid to work with the chromium headless mode')
+			options.add_argument('--ignore-certificate-errors')
 	except Exception as error:
 		module.fail_json(msg=str(error))
 		
@@ -92,7 +92,7 @@ def main():
 				actions = dict(type=list, requried=True),
 				window_width = dict(type=int,default=1920),
 				window_length = dict(type=int,default=1080),
-				validate_certs = dict(type=str,default=True)
+				validate_certs = dict(type=bool,default=True)
 			),
 			supports_check_mode=False
 		)
