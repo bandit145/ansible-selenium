@@ -1,12 +1,12 @@
 - name: test selenium module
-  hosts: all
+  hosts: localhost
   gather_facts: false
 
   tasks:
     - name: selenium config
       selenium:
-        url: http://192.168.50.2
-        validate_certs: no
+        url: http://localhost/
+        validate_certs: false
         wait: 5
         actions:
           - element: "New phpipam installation"
@@ -40,4 +40,3 @@
           - element: "/html/body/div/div[4]/div/div[1]/div[1]/div/div/form/div/div[10]/div/input"
             action: click
             get_element_by: xpath
-      delegate_to: localhost
